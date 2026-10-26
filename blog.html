@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Lifestyle Hub</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Georgia', serif; background: #fdf8f3; color: #3a3a3a; }
+
+    /* NAV */
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 60px; background: #fff; border-bottom: 1px solid #f0e6d8;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo { font-size: 1.6rem; font-weight: bold; color: #c0704a; letter-spacing: 1px; }
+    nav ul { list-style: none; display: flex; gap: 28px; }
+    nav ul a { text-decoration: none; color: #555; font-size: 0.95rem; font-family: 'Segoe UI', sans-serif; }
+    nav ul a:hover { color: #c0704a; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #f9ede3, #fdf3e7, #fce8d5);
+      text-align: center; padding: 90px 20px;
+    }
+    .hero span {
+      background: #c0704a; color: #fff; font-size: 0.8rem;
+      padding: 4px 14px; border-radius: 20px; font-family: 'Segoe UI', sans-serif;
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .hero h1 { font-size: 3rem; margin: 18px 0 14px; color: #2e2e2e; line-height: 1.3; }
+    .hero p { color: #888; font-size: 1.05rem; max-width: 520px; margin: auto; line-height: 1.8; }
+
+    /* FEATURED */
+    .featured {
+      display: grid; grid-template-columns: 1.5fr 1fr; gap: 30px;
+      padding: 60px 60px 30px; max-width: 1200px; margin: auto;
+    }
+    .featured-main {
+      background: #fff; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .featured-main .img {
+      height: 280px;
+      background: linear-gradient(135deg, #f4a261, #e76f51);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+    }
+    .featured-main .content { padding: 28px; }
+    .featured-main .content .cat {
+      color: #c0704a; font-size: 0.8rem; font-family: 'Segoe UI', sans-serif;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .featured-main .content h2 { font-size: 1.6rem; margin: 10px 0 12px; color: #2e2e2e; }
+    .featured-main .content p { color: #888; line-height: 1.8; font-size: 0.95rem; }
+    .meta { margin-top: 16px; font-size: 0.82rem; color: #bbb; font-family: 'Segoe UI', sans-serif; }
+
+    .featured-side { display: flex; flex-direction: column; gap: 20px; }
+    .side-card {
+      background: #fff; border-radius: 12px; padding: 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05); display: flex; gap: 16px; align-items: center;
+    }
+    .side-card .icon {
+      width: 70px; height: 70px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 2rem;
+    }
+    .side-card .text .cat { color: #c0704a; font-size: 0.75rem; font-family: 'Segoe UI', sans-serif; text-transform: uppercase; }
+    .side-card .text h3 { font-size: 1rem; margin: 6px 0 4px; color: #2e2e2e; }
+    .side-card .text p { font-size: 0.82rem; color: #999; line-height: 1.6; }
+
+    /* CATEGORIES */
+    .categories { padding: 40px 60px; max-width: 1200px; margin: auto; }
+    .categories h2 { font-size: 1.5rem; margin-bottom: 20px; color: #2e2e2e; }
+    .cat-grid { display: flex; gap: 14px; flex-wrap: wrap; }
+    .cat-pill {
+      padding: 10px 22px; border-radius: 30px; font-size: 0.88rem;
+      font-family: 'Segoe UI', sans-serif; cursor: pointer; border: none;
+      transition: transform 0.2s;
+    }
+    .cat-pill:hover { transform: translateY(-2px); }
+
+    /* BLOG GRID */
+    .blog-section { padding: 20px 60px 60px; max-width: 1200px; margin: auto; }
+    .blog-section h2 { font-size: 1.5rem; margin-bottom: 28px; color: #2e2e2e; }
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; }
+    .blog-card {
+      background: #fff; border-radius: 14px; overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06); transition: transform 0.2s;
+    }
+    .blog-card:hover { transform: translateY(-5px); }
+    .blog-card .thumb {
+      height: 180px; display: flex; align-items: center;
+      justify-content: center; font-size: 3.5rem;
+    }
+    .blog-card .body { padding: 20px; }
+    .blog-card .body .cat { color: #c0704a; font-size: 0.75rem; font-family: 'Segoe UI', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+    .blog-card .body h3 { font-size: 1.1rem; margin: 8px 0 10px; color: #2e2e2e; line-height: 1.4; }
+    .blog-card .body p { font-size: 0.85rem; color: #999; line-height: 1.7; }
+    .blog-card .body .meta { margin-top: 14px; font-size: 0.78rem; color: #ccc; font-family: 'Segoe UI', sans-serif; }
+
+    /* NEWSLETTER */
+    .newsletter {
+      background: linear-gradient(135deg, #c0704a, #e76f51);
+      text-align: center; padding: 70px 20px; color: #fff;
+    }
+    .newsletter h2 { font-size: 2rem; margin-bottom: 12px; }
+    .newsletter p { font-size: 1rem; opacity: 0.85; margin-bottom: 28px; font-family: 'Segoe UI', sans-serif; }
+    .newsletter form { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .newsletter input {
+      padding: 12px 22px; border-radius: 30px; border: none;
+      font-size: 0.95rem; width: 280px; outline: none;
+    }
+    .newsletter button {
+      padding: 12px 28px; background: #2e2e2e; color: #fff;
+      border: none; border-radius: 30px; font-size: 0.95rem; cursor: pointer;
+      font-family: 'Segoe UI', sans-serif; transition: background 0.2s;
+    }
+    .newsletter button:hover { background: #111; }
+
+    /* FOOTER */
+    footer {
+      background: #2e2e2e; color: #aaa; text-align: center;
+      padding: 30px 20px; font-size: 0.85rem; font-family: 'Segoe UI', sans-serif;
+    }
+    footer span { color: #c0704a; }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .featured { grid-template-columns: 1fr; padding: 30px 20px; }
+      .categories, .blog-section { padding: 20px; }
+      .hero h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">✦ The Lifestyle Hub</div>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Wellness</a></li>
+      <li><a href="#">Fashion</a></li>
+      <li><a href="#">Travel</a></li>
+      <li><a href="#">Food</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <span>✦ Welcome to the Hub</span>
+    <h1>Live Better, Every Day</h1>
+    <p>Inspiring stories, tips, and ideas for a healthier, happier, and more stylish life.</p>
+  </div>
+
+  <!-- FEATURED -->
+  <div class="featured">
+    <div class="featured-main">
+      <div class="img">🌿</div>
+      <div class="content">
+        <div class="cat">✦ Wellness</div>
+        <h2>10 Morning Habits That Will Transform Your Life</h2>
+        <p>Starting your day with intention can completely change how you feel, think, and perform. Here are 10 simple habits that top performers swear by every single morning.</p>
+        <div class="meta">By Pavan &nbsp;·&nbsp; June 12, 2025 &nbsp;·&nbsp; 5 min read</div>
+      </div>
+    </div>
+    <div class="featured-side">
+      <div class="side-card">
+        <div class="icon" style="background:#fce8d5;">🧘</div>
+        <div class="text">
+          <div class="cat">Mindfulness</div>
+          <h3>The Art of Doing Nothing</h3>
+          <p>Why rest is the most productive thing you can do.</p>
+        </div>
+      </div>
+      <div class="side-card">
+        <div class="icon" style="background:#e8f4e8;">🥗</div>
+        <div class="text">
+          <div class="cat">Food</div>
+          <h3>5 Easy Meals for a Healthy Week</h3>
+          <p>Quick, nutritious recipes you'll actually enjoy making.</p>
+        </div>
+      </div>
+      <div class="side-card">
+        <div class="icon" style="background:#e8eef8;">✈️</div>
+        <div class="text">
+          <div class="cat">Travel</div>
+          <h3>Solo Travel on a Budget</h3>
+          <p>How to explore the world without breaking the bank.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="categories">
+    <h2>Browse by Category</h2>
+    <div class="cat-grid">
+      <button class="cat-pill" style="background:#fce8d5; color:#c0704a;">🌿 Wellness</button>
+      <button class="cat-pill" style="background:#fdebd0; color:#e67e22;">👗 Fashion</button>
+      <button class="cat-pill" style="background:#e8f8f5; color:#1abc9c;">✈️ Travel</button>
+      <button class="cat-pill" style="background:#fef9e7; color:#f39c12;">🍽️ Food</button>
+      <button class="cat-pill" style="background:#f4ecf7; color:#8e44ad;">🧘 Mindfulness</button>
+      <button class="cat-pill" style="background:#eaf4fb; color:#2980b9;">💪 Fitness</button>
+      <button class="cat-pill" style="background:#fdfefe; color:#717d7e;">🏡 Home & Decor</button>
+    </div>
+  </div>
+
+  <!-- BLOG GRID -->
+  <div class="blog-section">
+    <h2>Latest Posts</h2>
+    <div class="blog-grid">
+
+      <div class="blog-card">
+        <div class="thumb" style="background:#fce8d5;">💆</div>
+        <div class="body">
+          <div class="cat">Wellness</div>
+          <h3>How to Build a Self-Care Routine That Actually Sticks</h3>
+          <p>Self-care isn't selfish — it's essential. Learn how to create a routine that fits your lifestyle.</p>
+          <div class="meta">June 10, 2025 &nbsp;·&nbsp; 4 min read</div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="thumb" style="background:#fdebd0;">👗</div>
+        <div class="body">
+          <div class="cat">Fashion</div>
+          <h3>Capsule Wardrobe: 20 Pieces, Endless Outfits</h3>
+          <p>Simplify your closet and always have something great to wear with these timeless essentials.</p>
+          <div class="meta">June 8, 2025 &nbsp;·&nbsp; 3 min read</div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="thumb" style="background:#e8f8f5;">🏖️</div>
+        <div class="body">
+          <div class="cat">Travel</div>
+          <h3>Top 7 Hidden Destinations to Visit in 2025</h3>
+          <p>Skip the tourist traps and discover these breathtaking, off-the-beaten-path locations.</p>
+          <div class="meta">June 5, 2025 &nbsp;·&nbsp; 6 min read</div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="thumb" style="background:#fef9e7;">🍳</div>
+        <div class="body">
+          <div class="cat">Food</div>
+          <h3>The Ultimate Guide to Meal Prepping Like a Pro</h3>
+          <p>Save time, eat healthier, and reduce stress with these meal prep strategies.</p>
+          <div class="meta">June 3, 2025 &nbsp;·&nbsp; 5 min read</div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="thumb" style="background:#f4ecf7;">🧠</div>
+        <div class="body">
+          <div class="cat">Mindfulness</div>
+          <h3>Digital Detox: Why You Need to Unplug Weekly</h3>
+          <p>Constant connectivity is draining you. Here's how a weekly detox can restore your energy.</p>
+          <div class="meta">June 1, 2025 &nbsp;·&nbsp; 4 min read</div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="thumb" style="background:#eaf4fb;">🏋️</div>
+        <div class="body">
+          <div class="cat">Fitness</div>
+          <h3>30-Minute Home Workouts for Busy People</h3>
+          <p>No gym? No problem. These effective workouts fit into even the busiest schedules.</p>
+          <div class="meta">May 28, 2025 &nbsp;·&nbsp; 3 min read</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="newsletter">
+    <h2>Stay Inspired 💌</h2>
+    <p>Get the latest lifestyle tips, recipes, and travel ideas delivered to your inbox weekly.</p>
+    <form>
+      <input type="email" placeholder="Enter your email address" />
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 <span>The Lifestyle Hub</span>. Made with ♥ for better living.</p>
+  </footer>
+
+</body>
+</html>
